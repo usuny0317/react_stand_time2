@@ -1,24 +1,26 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
+import { useContext, useState } from "react";
+
 import {
   StateControlWrapper,
   StyledInput,
   StyledButton,
   ButtonGroup,
 } from "../styles/StyledComponents";
+import { MessageContext } from "../contexts/MessageContext";
 
-function StateControl({ onMessageChange }) {
+function StateControl() {
   const [inputValue, setInputValue] = useState("");
+  const { setMessage } = useContext(MessageContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onMessageChange(inputValue);
+    setMessage(inputValue);
     setInputValue("");
   };
 
   const handleReset = () => {
     setInputValue("");
-    onMessageChange("");
+    setMessage("");
   };
 
   return (
@@ -41,9 +43,5 @@ function StateControl({ onMessageChange }) {
     </StateControlWrapper>
   );
 }
-
-StateControl.propTypes = {
-  onMessageChange: PropTypes.func.isRequired,
-};
 
 export default StateControl;
