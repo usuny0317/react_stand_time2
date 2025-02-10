@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 export const MessageContext = createContext();
 
 export function ContextProvider({ children }) {
-  const [message, Setmessage] = useState("");
+  const [message, setMessage] = useState("");
 
   return (
-    <MessageContext.Provider value={{ message, Setmessage }}>
+    <MessageContext.Provider value={{ message, setMessage }}>
       {children}
     </MessageContext.Provider>
   );
