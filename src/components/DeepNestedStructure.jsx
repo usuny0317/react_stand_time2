@@ -3,12 +3,14 @@ import {
   LevelContainer,
   MessageDisplayWrapper,
 } from "../styles/StyledComponents";
+import { useSelector } from "react-redux";
 
-function Level1({ message }) {
+function Level1() {
+  const mymessage = useSelector((state) => state.message?.message || "");
   return (
     <LevelContainer>
       <h3>Level 1</h3>
-      <Level2 message={message} />
+      <Level2 message={mymessage} />
     </LevelContainer>
   );
 }

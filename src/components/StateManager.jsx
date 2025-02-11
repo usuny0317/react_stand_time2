@@ -6,19 +6,21 @@ import {
   StyledButton,
   ButtonGroup,
 } from "../styles/StyledComponents";
+import { useDispatch } from "react-redux";
+import { setMessage } from "../slices/MessageSlice";
 
-function StateControl({ onMessageChange }) {
+function StateControl() {
   const [inputValue, setInputValue] = useState("");
-
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    onMessageChange(inputValue);
+    dispatch(setMessage(inputValue));
     setInputValue("");
   };
 
   const handleReset = () => {
+    dispatch(setMessage(""));
     setInputValue("");
-    onMessageChange("");
   };
 
   return (
@@ -27,9 +29,9 @@ function StateControl({ onMessageChange }) {
       <form onSubmit={handleSubmit}>
         <StyledInput
           type="text"
+          placeholder="메시지를 입력하세요"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder="메시지를 입력하세요"
         />
         <ButtonGroup>
           <StyledButton type="submit">전송</StyledButton>
@@ -43,7 +45,7 @@ function StateControl({ onMessageChange }) {
 }
 
 StateControl.propTypes = {
-  onMessageChange: PropTypes.func.isRequired,
+  onMessageChange: PropTypes.func,
 };
 
 export default StateControl;
